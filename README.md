@@ -8,6 +8,9 @@ mem2string
 
 A simply ruby utility to convert memory addresses to readable hexadecimal strings
 
+### License
+GPLv3
+
 ### Usage
 
 	mem2string <address>
