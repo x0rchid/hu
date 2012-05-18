@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+#
+# mem2string: A simple utility to convert hex memory addresses to characters
+# Author: x0rchid <x0rchidia@gmail.com>
+# Version: 0.1.0 (Oct 6, 2011)
+# License: GPLv3
+#
+# I have created this simple utility for my personal use in security research, so I didn't care
+# much about making it that nifty. Feel free to enhance and extend. Just give some credit :)
+#
+
+if (ARGV[0] =~ /^[[:xdigit:]]{8}$/ && ARGV.length == 1)
+  str = ""
+  ARGV[0].scan(/../).each {|c|
+    str << c.to_i(16).chr.to_str
+  }  
+  puts str.reverse
+
+else
+  puts "Usage: mem2string <number>"
+  puts "Example: mem2string 41623641"
+end
