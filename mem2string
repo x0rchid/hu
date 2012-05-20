@@ -14,6 +14,7 @@ if (ARGV[0] =~ /^[[:xdigit:]]{8}$/ && ARGV.length == 1)
   ARGV[0].scan(/../).each do |c|
     str << c.to_i(16).chr.to_str
   end
+
   puts str.reverse
 
 else

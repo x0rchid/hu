@@ -1,0 +1,74 @@
+#!/usr/bin/env ruby
+#
+# endecoder: A simple utility to encode and decode strings
+# Author: x0rchid <x0rchidia@gmail.com>
+# Version: 0.1.0 (May 18, 2012)
+# License: GPLv3
+#
+# I have created this simple utility for my personal use in security research, so I didn't care
+# much about making it that nifty. Feel free to enhance and extend. Just give some credit :)
+#
+
+require 'base64'
+require 'digest/md5'
+require 'digest/sha1'
+
+def str_to_b_a(input)
+  input.bytes.to_a
+end
+
+def encode_base64(input)
+  Base64.encode64(input)
+end
+
+def encode_decimal_ascii(input)
+  str_to_b_a(input).join(' ')
+end
+
+def encode_binary(input)
+  a = Array.new
+  input.each_char do |c|
+    a << c.unpack('B8')
+  end
+  a.join(' ')
+end
+
+def encode_hex(input)
+  a = Array.new
+  input.each_char do |c|
+    a << c.unpack('H8')
+  end
+  a.join(' ')
+end
+
+def digest_md5(input)
+  Digest::MD5.hexdigest(input)
+end
+
+def digest_sha1(input)
+  Digest::SHA1.hexdigest input
+end
+
+
+if (ARGV.length == 2)
+  case
+  when ARGV[0] == "-e" 
+    puts "Base64:\t\t" << encode_base64(ARGV[1])
+    puts "ASCII Dec:\t" << encode_decimal_ascii(ARGV[1])
+    puts "Binary:\t\t" << encode_binary(ARGV[1])
+    puts "Hex:\t\t" << encode_hex(ARGV[1])
+    puts
+    puts "Message Digest"
+    puts "=============="
+    puts "MD5:\t" << digest_md5(ARGV[1])
+    puts "SHA1:\t" << digest_sha1(ARGV[1])
+  when ARGV[0] == "-d"
+    puts Base64.decode64(ARGV[1])
+  end
+else
+  puts "Usage: endecoder [-e | -d] <string>"
+  puts "Example: endecoder -e facebook.com"
+end
+
+
+
