@@ -25,13 +25,13 @@ def encode_decimal_ascii(input)
   str_to_b_a(input).join(' ')
 end
 
-def encode_binary(input, byte_order, sep = ' ')
+def encode_binary(input, byte_order = :lsb , sep = ' ')
   a = Array.new
   input.each_char do |c|
-    case
-    when byte_order == :msb
+    
+    if byte_order == :msb
       a << c.unpack('B8')
-    when byte_order == :lsb
+    else
       a << c.unpack('b8')      
     end
   end
@@ -58,16 +58,16 @@ end
 if (ARGV.length == 2)
   case
   when ARGV[0] == "-e" 
-    puts "Base64:\t\t\t" << encode_base64(ARGV[1])
-    puts "ASCII Dec:\t\t" << encode_decimal_ascii(ARGV[1])
-    puts "Binary(MSB First):\t" << encode_binary(ARGV[1], :lsb)
-    puts "Binary(LSB First):\t" << encode_binary(ARGV[1], :msb)
-    puts "Hex:\t\t\t" << encode_hex(ARGV[1])
+    puts "Base64:".ljust(20) << encode_base64(ARGV[1])
+    puts "ASCII Dec:".ljust(20) << encode_decimal_ascii(ARGV[1])
+    puts "Binary(MSB First):".ljust(20) << encode_binary(ARGV[1], :lsb)
+    puts "Binary(LSB First):".ljust(20) << encode_binary(ARGV[1], :msb)
+    puts "Hex:".ljust(20) << encode_hex(ARGV[1])
     puts
     puts "Message Digest"
     puts "=============="
-    puts "MD5:\t" << digest_md5(ARGV[1])
-    puts "SHA1:\t" << digest_sha1(ARGV[1])
+    puts "MD5:".ljust(8) << digest_md5(ARGV[1])
+    puts "SHA1:".ljust(8) << digest_sha1(ARGV[1])
   when ARGV[0] == "-d"
     # puts Base64.decode64(ARGV[1])
     puts "Sorry, not yet implemented :-)"
