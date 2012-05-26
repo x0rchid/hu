@@ -25,7 +25,7 @@ def encode_decimal_ascii(input)
   str_to_b_a(input).join(' ')
 end
 
-def encode_binary(input, byte_order)
+def encode_binary(input, byte_order, sep = ' ')
   a = Array.new
   input.each_char do |c|
     case
@@ -35,7 +35,7 @@ def encode_binary(input, byte_order)
       a << c.unpack('b8')      
     end
   end
-  a.join(' ')
+  a.join(sep)
 end
 
 def encode_hex(input)
