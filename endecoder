@@ -66,8 +66,8 @@ if (ARGV.length == 2)
     puts
     puts "Message Digest"
     puts "=============="
-    puts "MD5:".ljust(8) << digest_md5(ARGV[1])
-    puts "SHA1:".ljust(8) << digest_sha1(ARGV[1])
+    puts "MD5:".ljust(6) << digest_md5(ARGV[1])
+    puts "SHA1:".ljust(6) << digest_sha1(ARGV[1])
   when ARGV[0] == "-d"
     # puts Base64.decode64(ARGV[1])
     puts "Sorry, not yet implemented :-)"
