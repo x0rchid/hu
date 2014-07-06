@@ -25,4 +25,4 @@ GPLv3
 
 ### Usage
 
-	mem2string [-e | -d] <string>
+	encoder [-e | -d] <string>
